@@ -154,6 +154,7 @@ html, body { font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
 
     /* Mobile: max-width 767px */
     @media (max-width:767px){
+  .nav-right{display:none !important;}
   /* Hug cards at bottom on mobile */
   .works-frame{padding-bottom:0 !important;}
 
@@ -242,7 +243,7 @@ html, body { font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
     /* --- Prevent Impact overlapping Works on large screens --- */
     .works-frame { margin-bottom: 56px; }
 
-    .impact-wrap{position:relative;width:100%;display:flex;justify-content:center;padding:40px 24px !important;z-index:5}
+    .impact-wrap{position:relative;width:100%;display:flex;justify-content:center;padding:0 24px !important;z-index:5}
     .impact-card { position: relative; z-index: 2; }
 
     
@@ -375,7 +376,7 @@ header{position:relative !important; top:auto !important;}
 
 /* === Definitive Impact number sizing === */
 @media (max-width:767px){
-  .impact-number{font-size:50px !important;line-height:1 !important;max-width:100% !important;}
+  .impact-number{font-size:70px !important;line-height:1 !important;max-width:100% !important;}
 }
 @media (min-width:768px){
   .impact-number{font-size:clamp(56px,8vw,128px);line-height:0.95;overflow-wrap:break-word}
@@ -384,10 +385,11 @@ header{position:relative !important; top:auto !important;}
 @media (min-width:768px){.impact-number{font-size:130px !important; font-weight:800 !important; color:#1647FF !important; line-height:1 !important;}}
 @media (max-width:767px){.impact-number{font-size:70px !important; font-weight:800 !important; color:#1647FF !important; line-height:1 !important;}}
 /* FINAL override for $12M+ (wins all conflicts) */
-@media(max-width:767px){.impact-number{font-size:100px !important;color:#1647FF !important;font-weight:800 !important;line-height:1 !important;}}
+@media(max-width:767px){.impact-number{font-size:70px !important;color:#1647FF !important;font-weight:800 !important;line-height:1 !important;}}
 @media(min-width:768px){.impact-number{font-size:130px !important;color:#1647FF !important;font-weight:800 !important;line-height:1 !important;}}
 /* Mobile final hero padding override */
 @media (max-width:767px){ .hero-wrap{padding-top:20px !important;} }
+@media (min-width:768px){.side-panel,.side-overlay{display:none !important; visibility:hidden !important; opacity:0 !important;}}
 </style>
 <style>
 /* FORCE mobile $12M+ size */
@@ -396,9 +398,28 @@ header{position:relative !important; top:auto !important;}
 <style>
 /* Final mobile override to ensure $12M+ is 100px on mobile */
 @media (max-width:767px){
-  .impact-number{font-size:100px !important; color:#1647FF !important; font-weight:800 !important; line-height:1 !important;}
+  .impact-number{font-size:70px !important; color:#1647FF !important; font-weight:800 !important; line-height:1 !important;}
 }
 </style>
+
+<style>
+/* Mobile side panel for nav (mobile only) */
+@media (max-width:767px){
+  .hamburger-btn{background:transparent;border:none;width:36px !important;height:28px !important;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+  .hamburger-btn svg{width:60px;height:50px;transform:scale(0.55);transform-origin:center;}
+  .side-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);opacity:0;visibility:hidden;transition:opacity .25s ease;z-index:9998}
+  .side-overlay.open{opacity:1;visibility:visible}
+  .side-panel{position:fixed;top:0;right:0;height:100%;width:320px;max-width:85vw;background:#fff;transform:translateX(100%);transition:transform .32s cubic-bezier(.2,.8,.2,1);z-index:9999;display:flex;flex-direction:column;align-items:center;padding:28px;box-shadow:-12px 0 40px rgba(3,6,12,0.18)}
+  .side-panel.open{transform:translateX(0)}
+  .side-panel .close{align-self:flex-end;background:none;border:none;font-size:28px;margin-bottom:8px;cursor:pointer}
+  .side-panel .panel-logo{font-weight:800;color:#1647FF;font-size:22px;letter-spacing:-1px;margin:12px 0}
+  .side-panel nav{display:flex;flex-direction:column;gap:18px;margin-top:28px;width:100%;align-items:center}
+  .side-panel nav a{font-size:18px;color:#111;text-decoration:none;font-weight:700}
+  .side-panel .panel-cta{margin-top:28px;width:100%;display:flex;justify-content:center}
+  .side-panel .panel-cta .cta-btn{width:90%;display:inline-flex;justify-content:center}
+}
+</style>
+<style>@media (min-width:768px){.hamburger-btn{display:none !important;}}</style>
 </head>
 <body>
   <div class="site">
@@ -439,6 +460,13 @@ header{position:relative !important; top:auto !important;}
       <div class="nav-right">
         <a class="btn" href="#">Work with us</a>
       </div>
+      
+      <button class="hamburger-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-panel">
+        <!-- Hamburger icon -->
+        <svg width="60" height="50" viewBox="0 0 60 50" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M0 5H60M0 25H60M0 45H60" stroke="black" stroke-width="10" stroke-linecap="round"/>
+        </svg>
+      </button>
     </header>
 
     <main class="hero-wrap">
@@ -546,5 +574,21 @@ header{position:relative !important; top:auto !important;}
       if(e.target.closest('.modal-card') && !e.target.matches('#ppClose')) e.stopPropagation();
     }, true);
   </script>
-</body>
-</html>
+
+<!-- Mobile side panel markup -->
+<div class="side-overlay" id="sideOverlay" tabindex="-1" aria-hidden="true"></div>
+<aside class="side-panel" id="mobilePanel" role="dialog" aria-hidden="true" aria-modal="true">
+  <button class="close" id="panelClose" aria-label="Close menu">×</button>
+  <div class="panel-logo" style="display:flex;align-items:center;justify-content:center;margin-top:12px;margin-bottom:12px;">
+  <!-- Full Pitchpouch SVG logo on top of mobile panel -->
+  <svg viewBox="0 0 2260 380" fill="none" xmlns="http://www.w3.org/2000/svg" style="height:36px;width:auto;">
+    <g clip-path="url(#clip0_109_220)">
+      <path d="M0 216.766V164.075H158.075V374.842C70.7728 374.842 0 304.069 0 216.766Z" fill="#1647FF"/>
+      <ellipse cx="158.075" cy="164.075" rx="158.075" ry="158.075" fill="#1647FF"/>
+      <path d="M2084.76 321.269V58.2294H2130.15V160.492H2131.06C2136.16 148.826 2143.76 139.833 2153.85 133.514C2164.05 127.195 2176.33 124.035 2190.67 124.035C2204.64 124.035 2216.74 127.255 2226.94 133.696C2237.15 140.015 2245.05 148.947 2250.64 160.492C2256.23 171.916 2259.03 185.405 2259.03 200.96V321.269H2213.64V209.892C2213.64 195.066 2210.05 183.46 2202.88 175.075C2195.71 166.568 2185.63 162.315 2172.62 162.315C2164.12 162.315 2156.64 164.381 2150.2 168.513C2143.88 172.523 2138.96 178.113 2135.44 185.283C2131.91 192.332 2130.15 200.535 2130.15 209.892V321.269H2084.76Z" fill="black"/>
+      <path d="M1971.2 325.098C1952.12 325.098 1935.59 321.026 1921.61 312.884C1907.64 304.742 1896.82 293.137 1889.17 278.068C1881.63 262.998 1877.86 245.134 1877.86 224.475V224.293C1877.86 203.755 1881.69 186.013 1889.35 171.065C1897 155.996 1907.76 144.391 1921.61 136.248C1935.59 128.106 1951.93 124.035 1970.65 124.035C1987.66 124.035 2002.37 127.316 2014.76 133.879C2027.16 140.319 2036.88 148.887 2043.93 159.581C2050.98 170.275 2054.99 182.063 2055.96 194.945V196.221H2013.3L2012.94 194.762C2011.12 185.405 2006.68 177.445 1999.63 170.883C1992.71 164.199 1983.23 160.857 1971.2 160.857C1961.72 160.857 1953.39 163.47 1946.22 168.695C1939.17 173.799 1933.7 181.091 1929.82 190.57Cg" style="height:36px;width:auto;">
+    <g clip-path="url(#clip0_109_220)">
+      <path d="M0 216.766V164.075H158.075V374.842C70.7728 374.842 0 304.069 0 216.766Z" fill="#1647FF"/>
+      <ellipse cx="158.075" cy="164.075" rx="158.075" ry="158.075" fill="#1647FF"/>
+      <path d="M2084.76 321.269V58.2294H2130.15V160.492H2131.06C2136.16 148.826 2143.76 139.833 2153.85 133.514C2164.05 127.195 2176.33 124.035 2190.67 124.035C2204.64 124.035 2216.74 127.255 2226.94 133.696C2237.15 140.015 2245.05 148.947 2250.64 160.492C2256.23 171.916 2259.03 185.405 2259.03 200.96V321.269H2213.64V209.892C2213.64 195.066 2210.05 183.46 2202.88 175.075C2195.71 166.568 2185.63 162.315 2172.62 162.315C2164.12 162.315 2156.64 164.381 2150.2 168.513C2143.88 172.523 2138.96 178.113 2135.44 185.283C2131.91 192.332 2130.15 200.535 2130.15 209.892V321.269H2084.76Z" fill="black"/>
+      <path d="M1971.2 325.098C1952.12 325.098 1935.59 321.026 1921.61 312.884C1907.64 304.742 1896.82 293.137 1889.17 278.068C1881.63 262.998 1877.86 245.134 1877.86 224.475V224.293C1877.86 203.755 1881.69 186.013 1889.35 171.065C1897 155.996 1907.76 144.391 1921.61 136.248C1935.59 128.106 1951.93 124.035 1970.65 124.035C1987.66 124.035 2002.37 127.316 2014.76 133.879C2027.16 140.319 2036.88 148.887 2043.93 159.581C2050.98 170.275 2054.99 182.063 2055.96 194.945V196.221H2013.3L2012.94 194.762C2011.12 185.405 2006.68 177.445 1999.63 170.883C
