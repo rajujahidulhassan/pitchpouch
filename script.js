@@ -38,7 +38,7 @@
   }
 
   // initial position — Pitch design by text or first
-  const defaultItem = items.find(i => /Pitch design/i.test(i.textContent)) || items[0];
+  const defaultItem = items.find(i => /Pitch\s+design/i.test(i.textContent)) || items[0];
   moveBlobTo(defaultItem);
 
   // on hover move blob
@@ -55,7 +55,7 @@
 
   // reposition on resize/scroll
   window.addEventListener('resize', () => moveBlobTo(defaultItem));
-  window.addEventListener('scroll', () => moveBlobTo(defaultItem));
+  // window.addEventListener('scroll', () => moveBlobTo(defaultItem));
 })();
 
 /* Mobile Panel Logic */

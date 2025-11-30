@@ -338,7 +338,8 @@ a.btn:hover {
   }
 
   .pp-services-frame .pp-service-list a {
-    font-size: 20px;
+    font-size: 24px;
+    justify-content: flex-start;
   }
 
   .pp-services-frame .pp-service-item .pp-arrow {
@@ -809,6 +810,7 @@ a.btn:hover {
   grid-template-columns: 1fr 2fr;
   gap: 48px;
   align-items: flex-start;
+  position: relative;
 }
 
 .pp-services-intro {
@@ -838,15 +840,20 @@ a.btn:hover {
   flex-direction: column;
   gap: 0 !important;
   padding-top: 40px;
+  width: 100%;
 }
 
 .pp-service-item {
   text-decoration: none;
   color: inherit;
-  display: inline-flex;
+  display: flex;
+  width: 100%;
+  position: relative;
+  z-index: 1;
   align-items: center;
-  justify-content: flex-start;
-  padding: 8px 12px;
+  justify-content: space-between;
+  padding: 0 12px;
+  margin-bottom: -6px;
   font-size: clamp(20px, 4vw, 30px);
   line-height: 1.02;
   font-weight: 600;
