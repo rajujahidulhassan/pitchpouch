@@ -181,7 +181,7 @@ a.btn:hover {
 .card {
   width: 100%;
   background: #fff;
-  border-radius: 14px;
+  border-radius: 10px;
   padding: 40px;
   box-shadow: 0 6px 60px rgba(17, 24, 39, 0.08);
   position: relative;
@@ -468,7 +468,7 @@ a.btn:hover {
 .work-box {
   position: relative;
   aspect-ratio: 4/3;
-  border-radius: 8px;
+  border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 8px 20px rgba(17, 24, 39, 0.05);
   background: #f8fbff;

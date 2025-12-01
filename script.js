@@ -227,3 +227,48 @@ document.addEventListener('DOMContentLoaded', () => {
   } catch (e) {/* ignore */ }
 
 })();
+
+/* Contact Form Logic (FormSubmit.co AJAX) */
+document.addEventListener('DOMContentLoaded', () => {
+  const contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const submitBtn = contactForm.querySelector('.submit-btn');
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      const formData = new FormData(contactForm);
+
+      // Use the email from the form action or hardcoded
+      fetch("https://formsubmit.co/ajax/raju.mia4396@gmail.com", {
+        method: "POST",
+        body: formData
+      })
+        .then(response => response.json())
+        .then(data => {
+          submitBtn.textContent = 'Message Sent!';
+          submitBtn.style.backgroundColor = '#10B981'; // Green success color
+          contactForm.reset();
+          setTimeout(() => {
+            submitBtn.textContent = originalBtnText;
+            submitBtn.style.backgroundColor = '';
+            submitBtn.disabled = false;
+          }, 3000);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          submitBtn.textContent = 'Error. Try again.';
+          submitBtn.style.backgroundColor = '#EF4444'; // Red error color
+          setTimeout(() => {
+            submitBtn.textContent = originalBtnText;
+            submitBtn.style.backgroundColor = '';
+            submitBtn.disabled = false;
+          }, 3000);
+        });
+    });
+  }
+});
+
