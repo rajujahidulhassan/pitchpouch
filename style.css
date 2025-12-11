@@ -281,7 +281,7 @@ a.btn:hover {
     height: 15px !important;
   }
 
-  .logo svg {
+  .logo img {
     height: 27px !important;
   }
 
@@ -534,6 +534,7 @@ a.btn:hover {
   flex-direction: column;
   justify-content: flex-end;
   padding: 12px;
+  text-decoration: none;
 }
 
 .more-text {
@@ -1239,6 +1240,9 @@ a.btn:hover {
   .submit-btn {
     width: 100%;
     margin-bottom: 16px;
+    height: auto;
+    padding: 12px 28px !important;
+    font-size: 16px !important;
   }
 
   .contact-left .social-icons {
